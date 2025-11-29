@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "f2642898-745f-463b-83eb-e03196078981",
+		"name": "Account creation",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "50095269",
+		"_collection_link": "https://splashconcept8-7583386.postman.co/workspace/Muideen's-Workspace~e42f4474-93e7-44fa-80a3-02b22dc58bd3/collection/50095269-f2642898-745f-463b-83eb-e03196078981?action=share&source=collection_link&creator=50095269"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"loginId\": \"+2349019603499\",\r\n\"password\": \"@string1\",\r\n\"deviceInfo\":\r\n{ \"deviceId\": \"TP1A.2236724.014\",\r\n\"deviceName\": \"iPhone17,1\",\r\n\"deviceType\": \"Mobile\",\r\n\"os\": \"iOS\",\r\n\"version\": \"18.3.1\",\r\n\"ipAddress\": \"185.212.449.116\"\r\n}\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base URL}}/auth/login",
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Register user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"alex@yopmail.com\",\n  \"phoneNumber\": \"+2349019603499\",\n  \"password\": \"@string1\",\n  \"firstName\": \"alex\",\n  \"lastName\": \"edufor\",\n  \"dateOfBirth\": \"1987-04-13\",\n  \"bvn\": \"23371220177\",\n  \"userType\": \"PERSONAL\",\n  \"gender\": \"MALE\",\n  \"address\": {\n    \"street\": \"2 George Street\",\n    \"city\": \"Lagos\",\n    \"state\": \"Lagos\",\n    \"country\": \"Nigeria\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base URL}}/auth/register",
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "verify BVN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bvn\": \"25370340179\",\r\n    \"processType\": \"Bank _account\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://services.staging.wayabank.ng/auth-serviceV3/auth/bvn/verify"
+			},
+			"response": []
+		},
+		{
+			"name": "Nin face verification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"imageUrl\": \"https://s3.eu-west-3.amazonaws.com/waya-2.0-file-resources/converted-files/127/127_1764439226169_4472.jpg\",\r\n    \"ninNumber\": \"54499897648\",\r\n    \"userId\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base URL}}/nin-verification/verify-with-face"
+			},
+			"response": []
+		},
+		{
+			"name": "Get ACCOUNT DETAILS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "{{base URL}}/api/v1/accounts/user/10/details"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"10\",\r\n  \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImN1c3RvbWVySWQiOiJJTkRWMjAyNTEwMjExMjE3NDkwMzExIiwidXNlcklkIjoiMTIyIiwiZGV2aWNlSWQiOiJUUDFBLjIyMDYyNC4wMTQiLCJzdWIiOiJib3NzX295ZW5paXlpQHlvcG1haWwuY29tIiwiaWF0IjoxNzYxMDUyOTkyLCJleHAiOjE3OTI2MTA1OTJ9.oz-vPOwatqm0D_0azpSI85n7K7bS0fU8JWD8gwnZ72k\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base URL}}/auth/logout"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Account",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"10\",\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{base URL}}/auth/delete"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base URL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
